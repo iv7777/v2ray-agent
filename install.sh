@@ -4395,7 +4395,6 @@ EOF
             "network": "tcp",
             "security": "tls",
             "tlsSettings": {
-              "rejectUnknownSni": true,
               "minVersion": "1.2",
               "certificates": [
                 {
@@ -9701,14 +9700,13 @@ menu() {
     echoContent green "作者：mack-a"
     echoContent green "当前版本：v3.4.13"
     echoContent green "Github：https://github.com/mack-a/v2ray-agent"
+    echoContent green "改进：iv7777"
+    echoContent green "改进版本：v1.01"
+    echoContent green "Github：https://github.com/iv7777/v2ray-agent"
     echoContent green "描述：八合一共存脚本\c"
     showInstallStatus
     checkWgetShowProgress
-    echoContent red "\n=========================== 推广区============================"
-    echoContent red "                                              "
-    echoContent green "VPS选购攻略：https://www.v2ray-agent.com/archives/1679975663984"
-    echoContent green "年付10美金低价VPS AS4837：https://www.v2ray-agent.com/archives/racknerdtao-can-zheng-li-nian-fu-10mei-yuan"
-    echoContent red "=============================================================="
+    echoContent red "\n=============================================================="
     if [[ -n "${coreInstallType}" ]]; then
         echoContent yellow "1.重新安装"
     else
