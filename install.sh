@@ -4240,43 +4240,48 @@ EOF
         initRealityKey
         cat <<EOF >/etc/v2ray-agent/xray/conf/12_VLESS_XHTTP_inbounds.json
 {
-"inbounds":[
+  "inbounds": [
     {
-	  "port": ${xHTTPort},
-	  "listen": "0.0.0.0",
-	  "protocol": "vless",
-	  "tag":"VLESSRealityXHTTP",
-	  "settings": {
-		"clients": $(initXrayClients 12),
-		"decryption": "none"
-	  },
-	  "streamSettings": {
-		"network": "xhttp",
-		"security": "reality",
-		"realitySettings": {
-            "show": false,
-            "dest": "${realityServerName}:${realityDomainPort}",
-            "xver": 0,
-            "serverNames": [
-                "${realityServerName}"
-            ],
-            "privateKey": "${realityPrivateKey}",
-            "publicKey": "${realityPublicKey}",
-            "maxTimeDiff": 70000,
-            "shortIds": [
-                "",
-                "6ba85179e30d4fc2"
-            ]
+      "port": ${xHTTPort},
+      "listen": "0.0.0.0",
+      "protocol": "vless",
+      "tag": "VLESSTLSXHTTP",
+      "settings": {
+        "clients": $(initXrayClients 12),
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "security": "tls",
+        "tlsSettings": {
+          "serverName": "${domain}",
+          "minVersion": "1.2",
+          "certificates": [
+            {
+              "certificateFile": "/etc/v2ray-agent/tls/${domain}.crt",
+              "keyFile": "/etc/v2ray-agent/tls/${domain}.key",
+              "ocspStapling": 3600
+            }
+          ]
         },
         "xhttpSettings": {
-            "host": "${realityServerName}",
-            "path": "/${customPath}xHTTP",
-            "mode": "auto"
+          "host": "",
+          "path": "/${customPath}xHTTP",
+          "mode": "auto"
         }
-	  }
-	}
-]
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls",
+          "quic"
+        ]
+      }
+    }
+  ]
 }
+
 EOF
     elif [[ -z "$3" ]]; then
         rm /etc/v2ray-agent/xray/conf/12_VLESS_XHTTP_inbounds.json >/dev/null 2>&1
