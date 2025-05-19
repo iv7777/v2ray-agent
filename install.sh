@@ -5080,16 +5080,17 @@ EOF
 
     elif [[ "${type}" == "vlessXHTTP" ]]; then
 
-        echoContent yellow " ---> 通用格式(VLESS+reality+XHTTP)"
-        echoContent green "    vless://${id}@$(getPublicIP):${port}?encryption=none&security=reality&type=xhttp&sni=${xrayVLESSRealityXHTTPServerName}&host=${xrayVLESSRealityXHTTPServerName}&fp=chrome&path=${path}&pbk=${currentRealityXHTTPPublicKey}&sid=6ba85179e30d4fc2#${email}\n"
+        echoContent yellow " ---> 通用格式(VLESS+TLS+XHTTP)"
+        echoContent green "    vless://${id}@${add}:${port}?encryption=none&security=tls&type=xhttp&host=${currentHost}&sni=${currentHost}&fp=chrome&path=%2F${path}&headerType=none#${email}\n"
 
-        echoContent yellow " ---> 格式化明文(VLESS+reality+XHTTP)"
-        echoContent green "协议类型:VLESS reality，地址:$(getPublicIP)，publicKey:${currentRealityXHTTPPublicKey}，shortId: 6ba85179e30d4fc2,serverNames：${xrayVLESSRealityXHTTPServerName}，端口:${port}，路径：${path}，SNI:${xrayVLESSRealityXHTTPServerName}，伪装域名:${xrayVLESSRealityXHTTPServerName}，用户ID:${id}，传输方式:xhttp，账户名:${email}\n"
+        echoContent yellow " ---> 格式化明文(VLESS+TLS+XHTTP)"
+        echoContent green "协议类型:VLESS TLS，地址:${add}，端口:${port}，路径:/$(echo ${path})，SNI:${currentHost}，伪装域名:${currentHost}，用户ID:${id}，传输方式:xhttp，账户名:${email}\n"
+
         cat <<EOF >>"/etc/v2ray-agent/subscribe_local/default/${user}"
-vless://${id}@$(getPublicIP):${port}?encryption=none&security=reality&type=xhttp&sni=${xrayVLESSRealityXHTTPServerName}&fp=chrome&path=${path}&pbk=${currentRealityXHTTPPublicKey}&sid=6ba85179e30d4fc2#${email}
+vless://${id}@${add}:${port}?encryption=none&security=tls&type=xhttp&host=${currentHost}&sni=${currentHost}&fp=chrome&path=%2F${path}&headerType=none#${email}
 EOF
-        echoContent yellow " ---> 二维码 VLESS(VLESS+reality+XHTTP)"
-        echoContent green "    https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=vless%3A%2F%2F${id}%40$(getPublicIP)%3A${port}%3Fencryption%3Dnone%26security%3Dreality%26type%3Dtcp%26sni%3D${xrayVLESSRealityXHTTPServerName}%26fp%3Dchrome%26path%3D${path}%26host%3D${xrayVLESSRealityXHTTPServerName}%26pbk%3D${currentRealityXHTTPPublicKey}%26sid%3D6ba85179e30d4fc2%23${email}\n"
+        echoContent yellow " ---> 二维码 VLESS(VLESS+TLS+XHTTP)"
+        echoContent green "    https://api.qrserver.com/v1/create-qr-code/?size=400x400&data=vless%3A%2F%2F${id}%40${add}%3A${port}%3Fencryption%3Dnone%26security%3Dtls%26type%3Dxhttp%26host%3D${currentHost}%26sni%3D${currentHost}%26fp%3Dchrome%26path%3D%252F${path}%26headerType%3Dnone%23${email}\n"
 
     elif
         [[ "${type}" == "vlessgrpc" ]]
