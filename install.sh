@@ -4194,6 +4194,13 @@ EOF
 		"tcpSettings": {
 			"acceptProxyProtocol": true
 		}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
 	  }
 	}
 	]
@@ -4225,6 +4232,13 @@ EOF
 		  "acceptProxyProtocol": true,
 		  "path": "/${customPath}ws"
 		}
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
 	  }
 	}
 ]
@@ -4342,6 +4356,13 @@ EOF
       "acceptProxyProtocol": true,
       "path": "/${customPath}vws"
     }
+  },
+  "sniffing": {
+    "enabled": true,
+    "destOverride": [
+      "http",
+      "tls"
+    ]
   }
 }
 ]
@@ -4369,6 +4390,13 @@ EOF
                 "grpcSettings": {
                     "serviceName": "${customPath}grpc"
                 }
+            },
+            "sniffing": {
+                "enabled": true,
+                "destOverride": [
+                  "http",
+                  "tls"
+                ]
             }
         }
     ]
@@ -4461,6 +4489,13 @@ EOF
                 "6ba85179e30d4fc2"
             ]
         }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     }
   ]
@@ -4488,6 +4523,13 @@ EOF
             "sockopt": {
                 "acceptProxyProtocol": true
             }
+      },
+      "sniffing": {
+        "enabled": true,
+        "destOverride": [
+          "http",
+          "tls"
+        ]
       }
     }
   ]
